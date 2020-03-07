@@ -38,9 +38,9 @@ public class Main {
 				switch(optionLogin){
 				case 1:
 					System.out.println("\nEnter Registered Email/Phone: ");
-					String id = sc.nextLine();
+					String id = sc.next();
 					System.out.println("\nEnter Registered Password: ");
-					String pass = sc.nextLine();
+					String pass = sc.next();
 					obj.login(id, pass);
 					break;
 				case 2:
