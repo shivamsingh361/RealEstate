@@ -10,20 +10,23 @@ public class DaoImpl implements Dao {
 
 	@Override
 	public boolean checkIfUserExist(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		if(StaticDB.userMap.containsKey(id))
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	public void register(User user) {
-		// TODO Auto-generated method stub
-		
+		StaticDB.userMap.put(user.getLoginId(), user);
 	}
 
 	@Override
 	public User login(String id, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		if(StaticDB.userMap.get(id).getPassword().equals(password))
+			return StaticDB.userMap.get(id);
+		else
+			return null;
 	}
 	
 }

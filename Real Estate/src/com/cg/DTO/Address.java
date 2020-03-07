@@ -13,6 +13,12 @@ public class Address {
 		this.state = state;
 		this.locality = locality;
 	}
+	public Address(String city, String state) {
+		super();
+		this.city = city;
+		this.state = state;
+
+	}
 	@Override
 	public String toString() {
 		return "Address houseNo=" + houseNo + ", city=" + city + ", state=" + state + ", locality=" + locality + "]";

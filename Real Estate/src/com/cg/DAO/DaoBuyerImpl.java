@@ -10,7 +10,7 @@ public class DaoBuyerImpl implements DaoBuyer {
 
 	@Override
 	public List<Property> searchProperty(Filter filter) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

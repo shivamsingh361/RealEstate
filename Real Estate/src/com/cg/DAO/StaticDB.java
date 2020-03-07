@@ -9,12 +9,12 @@ public class StaticDB {
 	public static Map<String,Property> propertyMap = new HashMap<String,Property>();
 	
 	static{
-		userMap.put("Ashishverma001@xyz.com", new User("BUYER", "Ashishverma001@xyz.com","password000"));
-		userMap.put("Shivamsingh001@xyz.com", new User("BUYER", "Shivamsingh001@xyz.com","password001"));
-		userMap.put("Nishantsharma01@xyz.com", new User("BUYER", "Nishantsharma01@xyz.com","password002"));
+		userMap.put("Ashishverma001@xyz.com", new User("BUYER", "Ashishverma001@xyz.com","password000","Ashish","9897979797",new Address("Mathura", "Uttar Pradesh")));
+		userMap.put("Shivamsingh001@xyz.com", new User("BUYER", "Shivamsingh001@xyz.com","password001","Shivam","9658745965",new Address("Noida", "Uttar Pradesh")));
+		userMap.put("Nishantsharma01@xyz.com", new User("BUYER", "Nishantsharma01@xyz.com","password002","Nishant","9856741236",new Address("G.Noida", "Uttar Pradesh")));
 		
-		userMap.put("Sumitgupta@xyz.com", new User("SELLER", "Sumitgupta@xyz.com","password043"));
-		userMap.put("Yashbhatia@xyz.com", new User("SELLER", "Yashbhatia@xyz.com","password034"));
+		userMap.put("Sumitgupta@xyz.com", new User("SELLER", "Sumitgupta@xyz.com","password043","Sumit","9897768985",new Address("G.Noida", "Uttar Pradesh")));
+		userMap.put("Yashbhatia@xyz.com", new User("SELLER", "Yashbhatia@xyz.com","password034","Yash","9897764123",new Address("Noida", "Uttar Pradesh")));
 		
 		propertyMap.put("001",new Property(new Address("1001", "Pune", "Maharastra","Talwade"),
 				"001", "5800000", "Near Hanuman Mandir", 
