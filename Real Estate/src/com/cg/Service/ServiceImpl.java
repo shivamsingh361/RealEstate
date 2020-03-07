@@ -2,11 +2,16 @@ package com.cg.Service;
 
 import java.util.List;
 
+import com.cg.DAO.Dao;
+import com.cg.DAO.DaoImpl;
 import com.cg.DTO.Filter;
+import com.cg.DTO.Property;
 import com.cg.DTO.User;
 
 public class ServiceImpl implements Service{
 
+	Dao dao = new DaoImpl();
+	User user;
 	@Override
 	public int verifyOTP(String id) {
 		// TODO Auto-generated method stub
@@ -32,9 +37,20 @@ public class ServiceImpl implements Service{
 	}
 
 	@Override
-	public String login(String id, String pass) {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean login(String id, String pass) {
+		User temp = dao.checkUser(id, pass);
+		if(temp == null)
+			return false;
+		else{
+			if(user.getType().equals("SELLER")){
+				
+				return getPropertyList(user.get);
+			}else{
+				user.
+			}
+			user = temp;
+			return true;
+		}
 	}
 
 	@Override
@@ -58,6 +74,12 @@ public class ServiceImpl implements Service{
 	@Override
 	public String logout() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Property> addProperty(Property prop) {
+		dao.addProperty(prop, user);
 		return null;
 	}
 

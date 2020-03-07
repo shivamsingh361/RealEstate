@@ -1,6 +1,7 @@
 package com.cg.Service;
 
 import java.util.List;
+
 import com.cg.DTO.*;
 
 interface Service {
@@ -10,11 +11,15 @@ interface Service {
 	abstract String userHome();
 	abstract String Home();
 	//
-	abstract String login(String id, String pass);
+	abstract boolean login(String id, String pass);
 	abstract String Register(User user);
-	//
+	//Buyer
 	abstract List<String> Search(Filter filter);
 	abstract String updateUserProfile(String Name);
 	//
 	abstract String logout();
+	
+	//Seller
+	List<Property> addProperty(Property prop);
+	
 }
