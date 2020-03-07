@@ -1,6 +1,5 @@
 package com.cg.DAO;
 
-import java.util.List;
 import com.cg.DTO.*;
 
 public interface Dao {

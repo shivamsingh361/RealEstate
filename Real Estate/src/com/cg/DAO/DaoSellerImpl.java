@@ -17,7 +17,7 @@ public class DaoSellerImpl implements DaoSeller {
 		StaticDB.setPropertyMap(temp);
 		Set<Entry<String, Property>> prop = temp.entrySet();
 		List<Property> propList = new ArrayList<Property>();
-		for(Entry tem : prop){
+		for(Entry<?, ?> tem : prop){
 			propList.add((Property)tem.getValue());
 		}
 		return propList;
@@ -30,7 +30,7 @@ public class DaoSellerImpl implements DaoSeller {
 		StaticDB.setPropertyMap(temp);
 		Set<Entry<String, Property>> prop = temp.entrySet();
 		List<Property> propList = new ArrayList<Property>();
-		for(Entry tem : prop){
+		for(Entry<?, ?> tem : prop){
 			propList.add((Property)tem.getValue());
 		}
 		return propList;

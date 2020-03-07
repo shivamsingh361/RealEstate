@@ -1,14 +1,14 @@
 package com.cg.DAO;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import com.cg.DTO.*;
 public class StaticDB {
-	public static Map<String,User> userMap = new HashMap<String,User>();
-	public static Map<String,Property> propertyMap = new HashMap<String,Property>();
+	private static Map<String,User> userMap = new HashMap<String,User>();
+	private static Map<String,Property> propertyMap = new HashMap<String,Property>();
 	
 	static{
+		
 		userMap.put("Ashishverma001@xyz.com", new User("BUYER", "Ashishverma001@xyz.com","password000","Ashish","9897979797",new Address("Mathura", "Uttar Pradesh")));
 		userMap.put("Shivamsingh001@xyz.com", new User("BUYER", "Shivamsingh001@xyz.com","password001","Shivam","9658745965",new Address("Noida", "Uttar Pradesh")));
 		userMap.put("Nishantsharma01@xyz.com", new User("BUYER", "Nishantsharma01@xyz.com","password002","Nishant","9856741236",new Address("G.Noida", "Uttar Pradesh")));
