@@ -24,6 +24,12 @@ public class Property {
 		return "Property [propAddress=" + propAddress + ", propId=" + propId + ", propPrice=" + propPrice
 				+ ", landmark=" + landmark + ", propDescription=" + propDescription + ", type=" + type + "]";
 	}
+	public String getPropId() {
+		return propId;
+	}
+	public void setPropId(String propId) {
+		this.propId = propId;
+	}
 
-
+	
 }
