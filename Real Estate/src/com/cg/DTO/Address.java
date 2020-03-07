@@ -27,5 +27,7 @@ public class Address {
 	public String toStringCustom() {
 		return   houseNo + " "+ city + " " + state + " " + locality;
 	}
-	
+	public String getCity(){
+		return this.city;
+	}
 }

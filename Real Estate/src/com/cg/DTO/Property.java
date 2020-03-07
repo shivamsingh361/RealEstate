@@ -9,6 +9,7 @@ public class Property {
 	private String propDescription;
 	private String type;
 	private User owner;
+
 	public Property(Address propAddress, String propId, String propPrice, String landmark, String propDescription,
 			String type) {
 		super();
@@ -30,6 +31,17 @@ public class Property {
 	public void setPropId(String propId) {
 		this.propId = propId;
 	}
-
+	public String getPropPrice() {
+		return propPrice;
+	}
+	public String getLandmark() {
+		return landmark;
+	}
+	public String getType() {
+		return type;
+	}
+	public String getCity(){
+		return propAddress.getCity();
+	}
 	
 }

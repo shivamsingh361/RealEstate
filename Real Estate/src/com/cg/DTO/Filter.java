@@ -12,7 +12,7 @@ public class Filter {
 		this.location = location;
 		this.maxPrice = maxPrice;
 		this.minPrice = minPrice;
-		this.type = type;
+		this.type = type;		//Villa, House, Flat
 		this.landmark = landmark;
 	}
 	public String getLocation() {
