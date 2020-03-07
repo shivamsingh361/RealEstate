@@ -37,5 +37,11 @@ public class DaoImpl implements Dao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Property> addProperty(Property prop, User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

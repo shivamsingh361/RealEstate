@@ -5,7 +5,6 @@ public class User {
 	public String type;
 	private String loginId;
 	private String password;
-	private String 
 	public User(String type, String loginId, String password) {
 		super();
 		this.type = type;
