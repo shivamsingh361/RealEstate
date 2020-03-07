@@ -85,7 +85,7 @@ public class Main {
 				System.out.println("Name:");
 				String pass2 = sc.next();
 				if(pass1==pass2)
-					obj.Register(new User());	//pass all parameters.
+					//obj.Register(new User());	//pass all parameters.
 				break;
 /* ******************************** Case 2 ends here ******************************************** */
 			case 3:

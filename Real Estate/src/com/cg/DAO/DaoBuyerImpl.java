@@ -6,24 +6,24 @@ import com.cg.DTO.Filter;
 import com.cg.DTO.Property;
 import com.cg.DTO.User;
 
-public class DaoImpl implements Dao {
+public class DaoBuyerImpl implements DaoBuyer {
 
 	@Override
-	public boolean checkIfUserExist(String id) {
+	public List<Property> searchProperty(Filter filter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public User updateUser(String id, User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updatePassword(String id, String newPassword) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
-	public void register(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public User login(String id, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

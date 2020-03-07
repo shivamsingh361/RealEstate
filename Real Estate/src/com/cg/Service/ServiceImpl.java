@@ -3,7 +3,11 @@ package com.cg.Service;
 import java.util.List;
 
 import com.cg.DAO.Dao;
+import com.cg.DAO.DaoBuyer;
+import com.cg.DAO.DaoBuyerImpl;
 import com.cg.DAO.DaoImpl;
+import com.cg.DAO.DaoSeller;
+import com.cg.DAO.DaoSellerImpl;
 import com.cg.DTO.Filter;
 import com.cg.DTO.Property;
 import com.cg.DTO.User;
@@ -11,6 +15,8 @@ import com.cg.DTO.User;
 public class ServiceImpl implements Service{
 
 	Dao dao = new DaoImpl();
+	DaoSeller sellerDao = new DaoSellerImpl();
+	DaoBuyer buyerDao = new DaoBuyerImpl();
 	User user;
 	@Override
 	public int verifyOTP(String id) {
@@ -38,15 +44,15 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public boolean login(String id, String pass) {
-		User temp = dao.checkUser(id, pass);
+		User temp = dao.login(id, pass);
 		if(temp == null)
 			return false;
 		else{
 			if(user.getType().equals("SELLER")){
 				
-				return getPropertyList(user.get);
+			
 			}else{
-				user.
+				
 			}
 			user = temp;
 			return true;
@@ -79,7 +85,7 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public List<Property> addProperty(Property prop) {
-		dao.addProperty(prop, user);
+		sellerDao.addProperty(prop);
 		return null;
 	}
 
