@@ -24,6 +24,6 @@ public class Property {
 		return "Property [propAddress=" + propAddress + ", propId=" + propId + ", propPrice=" + propPrice
 				+ ", landmark=" + landmark + ", propDescription=" + propDescription + ", type=" + type + "]";
 	}
-	
-	
+
+
 }
