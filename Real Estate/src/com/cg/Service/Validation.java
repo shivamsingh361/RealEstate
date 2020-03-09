@@ -20,7 +20,6 @@ public class Validation {
 
 	public boolean isEmailValid(String email){
 		String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-		 
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(email);
 			if(matcher != null)
@@ -53,17 +52,6 @@ public class Validation {
 
 	}
 
-	public boolean isPropTypeValid(String type){
-		String regex = "^[A-Za-z]+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(type);
-		if(matcher != null)
-			return true;
-		else
-			return false;
-
-	}
-
 	public boolean isPasswordValid(String password){
 		String regex = "((?=.*[a-z])(?=.*d)(?=.*[@#$%])(?=.*[A-Z]).{6,16})";
 		Pattern pattern = Pattern.compile(regex);
@@ -76,11 +64,18 @@ public class Validation {
 	}
 	
 	public Filter isFilterValid(Filter filter){
+		if(!isPropPriceValid(filter.getMaxPrice()))
+			filter.setMaxPrice("9999999999999");
+		if(!isPropPriceValid(filter.getMinPrice()))
+			filter.setMinPrice("0");
+		if(!isNameValid(filter.getLandmark()))
+			filter.setLandmark(null);
+		if(!isNameValid(filter.getLocation()))
+			filter.setLocation(null);
 		return filter;
 	}
 	
 	public boolean isUserTypeVaild(String userType){
-		
 		if( userType.equalsIgnoreCase("Buyer") || userType.equalsIgnoreCase("Seller"))
 			return true;
 		else

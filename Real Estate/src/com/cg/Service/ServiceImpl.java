@@ -1,5 +1,6 @@
 package com.cg.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cg.DAO.Dao;
@@ -11,6 +12,7 @@ import com.cg.DAO.DaoSellerImpl;
 import com.cg.DTO.Filter;
 import com.cg.DTO.Property;
 import com.cg.DTO.User;
+import com.cg.DTO.UserType;
 
 public class ServiceImpl implements Service{
 
@@ -20,26 +22,40 @@ public class ServiceImpl implements Service{
 	User user;
 	@Override
 	public int verifyOTP(String id) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(dao.checkIfUserExist(id)) {
+			return (int) (Math.random()*10000);
+		}
+		else
+			return 0;
 	}
 
 	@Override
-	public String updatePassword(String id, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updatePassword(String oldPass, String newPass) {
+		if(user.getPassword().equals(oldPass)) {
+			if(buyerDao.updatePassword(user.getLoginId(), newPass))
+				return "Password Updated";
+			else
+				return "Server Not Found";
+		}
+		else
+			return "Invalid Old Password!";
 	}
 
 	@Override
-	public String userHome() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String Home() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Property> userHome() {
+		List<Property> properties = new ArrayList<Property>();
+		if(user.type.equals(UserType.BUYER)) {
+			for(Property prop: buyerDao.searchProperty(null)) {
+				properties.add(prop);
+			}
+		}
+		else {
+			for(Property prop: buyerDao.searchProperty(null)) {
+				if(prop.getOwner().equals(user))
+					properties.add(prop);
+			}
+		}
+		return properties;
 	}
 
 	@Override
@@ -48,12 +64,6 @@ public class ServiceImpl implements Service{
 		if(temp == null)
 			return false;
 		else{
-			if(user.getType().equals("SELLER")){
-				
-			
-			}else{
-				
-			}
 			user = temp;
 			return true;
 		}
@@ -61,32 +71,45 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public String Register(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		if(dao.checkIfUserExist(user.getLoginId())) {
+			dao.register(user);
+			return "New User Created!";
+		}
+		else
+			return "User Id Already exists. Please Login!";
 	}
 
 	@Override
-	public List<String> Search(Filter filter) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Property> Search(Filter filter) {
+		return buyerDao.searchProperty(filter);
 	}
 
 	@Override
-	public String updateUserProfile(String Name) {
-		// TODO Auto-generated method stub
-		return null;
+	public User updateUserProfile(String Name, String contact) {
+		if(Name!= null)
+			user.setName(Name);
+		if(contact!=null)
+			user.setPhoneNo(contact);
+		return buyerDao.updateUser(user.getLoginId(), user);
 	}
 
 	@Override
 	public String logout() {
-		// TODO Auto-generated method stub
-		return null;
+		user = null;
+		return "OK";
 	}
 
 	@Override
 	public List<Property> addProperty(Property prop) {
-		sellerDao.addProperty(prop);
-		return null;
+		prop.setOwner(user);
+		return sellerDao.addProperty(prop);
 	}
+
+	@Override
+	public List<Property> deleteProperty(String propId) {
+		return sellerDao.deleteProperty(propId);
+	}
+
+
 
 }

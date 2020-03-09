@@ -1,16 +1,19 @@
 package com.cg.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
-	public String type;
+	public UserType type = UserType.BUYER;
 	private String loginId;
 	private String password;
 	private String name;
 	private String phoneNo;
 	private Address address;	
 	
-	
-	public User(String type, String loginId, String password, String name, String phoneNo, Address address) {
+	public User(UserType type, String loginId, String password, String name, String phoneNo, Address address) {
+		
 		super();
 		this.type = type;
 		this.loginId = loginId;
@@ -20,10 +23,10 @@ public class User {
 		this.address = address;
 	}
 	
-	public String getType() {
+	public UserType getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(UserType type) {
 		this.type = type;
 	}
 	public String getLoginId() {
@@ -56,5 +59,4 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	
 }

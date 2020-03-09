@@ -2,14 +2,20 @@ package com.cg.Presentation;
 
 import java.util.Scanner;
 
+import org.omg.CORBA.DynAnyPackage.Invalid;
+
 import com.cg.DTO.User;
+import com.cg.DTO.UserType;
+import com.cg.Service.Service;
 import com.cg.Service.ServiceImpl;
 
 public class Main {
 
 	public static void main(String[] args) {
-		ServiceImpl obj = new ServiceImpl();
+		Service obj = new ServiceImpl();
 		do{
+			boolean home = false;
+			boolean exit = false;
 			Scanner sc = new Scanner(System.in);
 			Integer option = 1;
 			try {
@@ -37,11 +43,48 @@ public class Main {
 				}
 				switch(optionLogin){
 				case 1:
+					while(true){
 					System.out.println("\nEnter Registered Email/Phone: ");
 					String id = sc.next();
 					System.out.println("\nEnter Registered Password: ");
 					String pass = sc.next();
-					obj.login(id, pass);
+					if(obj.login(id, pass)) {
+						while(!home && !exit) {
+							System.out.println("\n\t\t\tThis is User's Home\n");
+							obj.userHome().stream().limit(5).forEach(System.out::print);	// display only 5  property on first page						
+							System.out.println("\n\n1.Apply Filters and Search Properties"
+									+ "\n2.Update Profile"
+									+ "\n3.Update Password"
+									+ "\n4.Logout");
+							switch (sc.next()) {
+							case "1":
+								//Apply filters of show all properties and show here; 
+								obj.Search(null);
+								break;
+							case "2":
+								//Update Name, Phone_no here and call update profile method.
+								obj.updateUserProfile("", "");
+								break;
+							case "3":
+								//input old pass, new pass and new pass again and pass it by mehtod:
+								obj.updatePassword("","");
+								break;
+							case "4":
+								System.out.println("Log-ing Out! ---------------------------------------------------");
+								obj.logout();
+								break;
+							default:
+								break;
+							}
+							
+						}
+					}
+					else {
+						System.out.println("Try Again?(Press y)\n Else(press 'n')");
+						if(!sc.next().equalsIgnoreCase("y"))
+							break;
+					}
+					};
 					break;
 				case 2:
 					System.out.println("\nEnter Registered Email/Phone: ");
@@ -84,8 +127,10 @@ public class Main {
 				String pass1 = sc.next();
 				System.out.println("Name:");
 				String pass2 = sc.next();
+				System.out.println("Contact:");
+				String phoneNo = sc.next();
 				if(pass1==pass2)
-					//obj.Register(new User());	//pass all parameters.
+				obj.Register(new User(UserType.BUYER, email, pass1, name, phoneNo, null));	//pass all parameters.
 				break;
 /* ******************************** Case 2 ends here ******************************************** */
 			case 3:
