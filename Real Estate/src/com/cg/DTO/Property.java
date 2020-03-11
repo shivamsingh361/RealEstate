@@ -3,7 +3,8 @@ package com.cg.DTO;
 public class Property {
 
 	private Address propAddress;
-	private static String propId = "";
+	private  String propId;
+	private static int propCounter = 0;
 	private String propPrice;
 	private String landmark;
 	private String propDescription;
@@ -14,7 +15,7 @@ public class Property {
 			PropertyType type) {
 		super();
 		this.propAddress = propAddress;
-		setPropId(String.valueOf(Integer.parseInt(this.propId)+1));
+		this.propId = Integer.toString(propCounter++);
 		this.propPrice = propPrice;
 		this.landmark = landmark;
 		this.propDescription = propDescription;

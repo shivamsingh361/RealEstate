@@ -7,6 +7,7 @@ import com.cg.DTO.*;
 public interface Service {
 	abstract int verifyOTP(String id);			// Return 6-digit OTP and sends same to registered userid also veryfy the user id if exist.
 	abstract String updatePassword(String oldPass, String newPass); //update password of user.
+	abstract boolean forgotPassword(String id, String newPass);
 	//
 	abstract List<Property> userHome();
 	//abstract String Home();

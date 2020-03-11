@@ -43,11 +43,12 @@ public class Main {
 				}
 				switch(optionLogin){
 				case 1:
-					while(true){
+					while(!home && !exit){
 					System.out.println("\nEnter Registered Email/Phone: ");
 					String id = sc.next();
-					System.out.println("\nEnter Registered Password: ");
+					System.out.println("\nEnter Registered Password: ");//Ashishverma001@xyz.com
 					String pass = sc.next();
+					System.out.println(id+pass);
 					if(obj.login(id, pass)) {
 						while(!home && !exit) {
 							System.out.println("\n\t\t\tThis is User's Home\n");
@@ -72,6 +73,7 @@ public class Main {
 							case "4":
 								System.out.println("Log-ing Out! ---------------------------------------------------");
 								obj.logout();
+								home=true;
 								break;
 							default:
 								break;
@@ -79,26 +81,26 @@ public class Main {
 							
 						}
 					}
-					else {
 						System.out.println("Try Again?(Press y)\n Else(press 'n')");
 						if(!sc.next().equalsIgnoreCase("y"))
 							break;
-					}
+						else
+							home=false;
 					};
 					break;
 				case 2:
 					System.out.println("\nEnter Registered Email/Phone: ");
-					String id1 = sc.nextLine();
+					String id1 = sc.next();
 					Integer otpentered, otp =  obj.verifyOTP(id1);
 					System.out.println("\nEnter OTP Sent, again: "+otp);
-					otpentered = sc.nextInt();
-					if(otp == otpentered){
+					otpentered = Integer.parseInt(sc.next());
+					if(otp.equals(otpentered)){
 						System.out.println("\nEnter Password: ");
-						String pass1 = sc.nextLine();
+						String pass1 = sc.next();
 						System.out.println("\nEnter Password Again: ");
-						String pass2 = sc.nextLine();
-						if(pass1 == pass2)
-							obj.updatePassword(id1, pass1);
+						String pass2 = sc.next();
+						if(pass1.equals(pass2))
+							System.out.println(obj.forgotPassword(id1, pass1));
 						else
 							System.out.println("\nPassword not Match");								
 					}else{
@@ -152,6 +154,5 @@ public class Main {
 		}while(true);
 
 	}
-//hi;
 
 }

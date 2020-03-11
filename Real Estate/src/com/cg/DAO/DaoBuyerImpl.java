@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import com.cg.DTO.*;
+import com.cg.exception.UserException;
 //import com.cg.DAO.*;
 
 
@@ -43,7 +44,13 @@ public class DaoBuyerImpl implements DaoBuyer {
 
 	public boolean updatePassword(String id, String newPassword) {
 		Map<String, User> temp = StaticDB.getUserMap();
-		temp.get(id).setPassword(newPassword);
+		try {
+			//System.out.println(">"+id+"<");
+			temp.get(id).setPassword(newPassword);
+			StaticDB.setUserMap(temp);
+		}catch(Exception e) {
+			throw new UserException("Some-thing went wrong while updating password.",e);
+		}
 		return true;
 	}
 

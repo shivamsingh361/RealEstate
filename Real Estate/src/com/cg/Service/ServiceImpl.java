@@ -30,6 +30,11 @@ public class ServiceImpl implements Service{
 	}
 
 	@Override
+	public boolean forgotPassword(String id, String newPass) {
+			return buyerDao.updatePassword(id, newPass);
+	}
+	
+	@Override
 	public String updatePassword(String oldPass, String newPass) {
 		if(user.getPassword().equals(oldPass)) {
 			if(buyerDao.updatePassword(user.getLoginId(), newPass))
@@ -61,6 +66,7 @@ public class ServiceImpl implements Service{
 	@Override
 	public boolean login(String id, String pass) {
 		User temp = dao.login(id, pass);
+		System.out.println(id+pass);
 		if(temp == null)
 			return false;
 		else{
@@ -109,7 +115,5 @@ public class ServiceImpl implements Service{
 	public List<Property> deleteProperty(String propId) {
 		return sellerDao.deleteProperty(propId);
 	}
-
-
 
 }
