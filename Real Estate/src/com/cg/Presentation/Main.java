@@ -46,7 +46,7 @@ public class Main {
 					while(!home && !exit){
 					System.out.println("\nEnter Registered Email/Phone: ");
 					String id = sc.next();
-					System.out.println("\nEnter Registered Password: ");//Ashishverma001@xyz.com
+					System.out.println("\nEnter Registered Password: ");
 					String pass = sc.next();
 					System.out.println(id+pass);
 					if(obj.login(id, pass)) {
