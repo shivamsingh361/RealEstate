@@ -20,6 +20,11 @@ public class ServiceImpl implements Service{
 	DaoSeller sellerDao = new DaoSellerImpl();
 	DaoBuyer buyerDao = new DaoBuyerImpl();
 	User user;
+
+	public User getUser() {
+		return user;
+	}
+
 	@Override
 	public int verifyOTP(String id) {
 		if(dao.checkIfUserExist(id)) {
@@ -49,14 +54,15 @@ public class ServiceImpl implements Service{
 	@Override
 	public List<Property> userHome() {
 		List<Property> properties = new ArrayList<Property>();
+		List<Property> allProperties = buyerDao.searchProperty(null);
 		if(user.type.equals(UserType.BUYER)) {
-			for(Property prop: buyerDao.searchProperty(null)) {
+			for(Property prop:allProperties ) {
 				properties.add(prop);
 			}
 		}
 		else {
-			for(Property prop: buyerDao.searchProperty(null)) {
-				if(prop.getOwner().equals(user))
+			for(Property prop:allProperties) {
+				if(user.equals(prop.getOwner()))
 					properties.add(prop);
 			}
 		}
@@ -77,7 +83,7 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public String Register(User user) {
-		if(dao.checkIfUserExist(user.getLoginId())) {
+		if(!dao.checkIfUserExist(user.getLoginId())) {
 			dao.register(user);
 			return "New User Created!";
 		}

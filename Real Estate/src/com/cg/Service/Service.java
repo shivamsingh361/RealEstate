@@ -23,5 +23,6 @@ public interface Service {
 	//Seller
 	List<Property> addProperty(Property prop);
 	List<Property> deleteProperty(String propId);
+	abstract User getUser();
 	
 }

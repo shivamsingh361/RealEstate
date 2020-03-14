@@ -5,9 +5,9 @@ public class Filter {
 	private String location;
 	private String maxPrice;
 	private String minPrice;
-	private String type;
+	private PropertyType type;
 	private String landmark;
-	public Filter(String location, String maxPrice, String minPrice, String type, String landmark) {
+	public Filter(String location, String maxPrice, String minPrice, PropertyType type, String landmark) {
 		super();
 		this.location = location;
 		this.maxPrice = maxPrice;
@@ -33,10 +33,10 @@ public class Filter {
 	public void setMinPrice(String minPrice) {
 		this.minPrice = minPrice;
 	}
-	public String getType() {
+	public PropertyType getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(PropertyType type) {
 		this.type = type;
 	}
 	public String getLandmark() {
