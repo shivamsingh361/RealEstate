@@ -94,7 +94,10 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public List<Property> Search(Filter filter) {
-		return buyerDao.searchProperty(filter);
+		if(filter.getMaxPrice().equals("-") && filter.getMinPrice().equals("-") && filter.getLocation().equals("-"))
+			return buyerDao.searchProperty(null);
+		else
+			return buyerDao.searchProperty(filter);
 	}
 
 	@Override

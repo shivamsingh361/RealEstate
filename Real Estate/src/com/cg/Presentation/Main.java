@@ -83,14 +83,7 @@ public class Main {
 										String propType = sc.next();
 										System.out.println("\nLandmark(Enter '-' for not applying...)\t:");
 										String lm = sc.next();
-										obj.Search(new Filter(loc, min, max, decode.decodeType(propType), lm));
-										boolean userhome = true;
-										while(userhome) {
-											/*
-											 * case "5": System.out.println("Enter Property ID:"); String propId =
-											 * sc.next(); obj.
-											 */
-										}
+										System.out.println(obj.Search(new Filter(loc, min, max, decode.decodeType(propType), lm)));
 										break;
 									case "2":
 										System.out.println("\n User's Profile ->->->->\n");

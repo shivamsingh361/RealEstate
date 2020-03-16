@@ -28,9 +28,27 @@ public class DaoBuyerImpl implements DaoBuyer {
 		else
 			for(Entry<String, Property> tem : prop){
 				Property property = (Property)tem.getValue();
-				if(property.getCity().equals(filter.getLocation()) && (filter.getType().equals(property.getType())))
-					if((Integer.parseInt(filter.getMinPrice()) < Integer.parseInt(property.getPropPrice())) && (Integer.parseInt(filter.getMaxPrice()) > Integer.parseInt(property.getPropPrice())) )
+				if(!property.getCity().equals("-")) {
+					if(property.getCity().equals(filter.getLocation())) 
 						propList.add(property);
+				}
+				if(!property.getType().equals("-")) {
+					if(property.getType().equals(filter.getType())) 
+						propList.add(property);
+				}
+				if(!filter.getMaxPrice().equals("-") && !filter.getMinPrice().equals("-")) {
+					if(Integer.parseInt(filter.getMaxPrice()) > Integer.parseInt(property.getPropPrice())  &&  Integer.parseInt(filter.getMinPrice()) < Integer.parseInt(property.getPropPrice())) 
+						propList.add(property);
+				}
+				
+			/*
+			 * if(property.getCity().equals(filter.getLocation()) &&
+			 * (filter.getType().equals(property.getType())))
+			 * if((Integer.parseInt(filter.getMinPrice()) <
+			 * Integer.parseInt(property.getPropPrice())) &&
+			 * (Integer.parseInt(filter.getMaxPrice()) >
+			 * Integer.parseInt(property.getPropPrice())) ) propList.add(property);
+			 */
 			}
 			return propList;
 	}
