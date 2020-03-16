@@ -54,4 +54,9 @@ public class DaoBuyerImpl implements DaoBuyer {
 		return true;
 	}
 
+	@Override
+	public Property getPropertyById(String propId) {
+			return StaticDB.getPropertyMap().get(propId);
+	}
+
 }

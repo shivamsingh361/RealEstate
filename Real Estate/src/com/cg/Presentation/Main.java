@@ -7,11 +7,13 @@ import org.omg.CORBA.DynAnyPackage.Invalid;
 import com.cg.DTO.Address;
 import com.cg.DTO.Filter;
 import com.cg.DTO.Property;
+import com.cg.DTO.PropertyType;
 import com.cg.DTO.User;
 import com.cg.DTO.UserType;
 import com.cg.Service.Service;
 import com.cg.Service.ServiceImpl;
 import com.cg.Service.Validation;
+import com.cg.exception.PropertyException;
 
 public class Main {
 
@@ -49,157 +51,175 @@ public class Main {
 				switch(optionLogin){
 				case 1:
 					while(!home && !exit){
-					System.out.println("\nEnter Registered Email/Phone: ");
-					String id = sc.next();
-					System.out.println("\nEnter Registered Password: ");
-					String pass = sc.next();
-					if(obj.login(id, pass)) {
-						while(!home && !exit) {
-							if(obj.getUser().getType().equals(UserType.BUYER)) {
-								System.out.println("***********************************************************************************");
-								System.out.println("\n\t\t\tThis is User's Home\n");
-								obj.userHome().stream().limit(5).forEach(System.out::print);	// display only 5  property on first page						
-								System.out.println("\n\n1.Apply Filters and Search Properties"
-										+ "\n2.Update Profile"
-										+ "\n3.Update Password"
-										+ "\n4.Logout");
-								switch (sc.next()) {
-								case "1":
-									System.out.println("\n Apply Filters by providing 5 Parameters ->->->->\n");
-									System.out.println("\nLocation(Enter '-' for not applying...)\t:");
-									String loc = sc.next();
-									System.out.println("\nMin Price(Enter '-' for not applying...)\t:");
-									String min = sc.next();
-									System.out.println("\nMax Price(Enter '-' for not applying...)\t:");
-									String max = sc.next();
-									System.out.println("\nProperty Type(Enter '-' for not applying,\r\n"
-											+ " 1.VILLA,\r\n" + 
-											"	2.FLAT,\r\n" + 
-											"	3.APPARTMENT,\r\n" + 
-											"	4.HOUSE)\t\t:");
-									String propType = sc.next();
-									System.out.println("\nLandmark(Enter '-' for not applying...)\t:");
-									String lm = sc.next();
-									obj.Search(new Filter(loc, min, max, decode.decodeType(propType), lm));
-									break;
-								case "2":
-									System.out.println("\n User's Profile ->->->->\n");
-									System.out.println(obj.getUser());
-									System.out.println("New Name (Enter '-' for not change)\t:");
-									String name = sc.next();
-									System.out.println("\nContact (Enter '-' for not change)\t:");
-									String contact = sc.next();
-									obj.updateUserProfile(name, contact);
-									break;
-								case "3":
-									//input old pass, new pass and new pass again and pass it by mehtod:
-									System.out.println("\n User's Profile ->->->->\n");
-									System.out.println(obj.getUser());
-									System.out.println("Old Password (Enter '-' for not change)\t:");
-									String oldPass = sc.next();
-									System.out.println("\nNew Password (Enter '-' for not change)\t:");
-									String newPass = sc.next();
-									System.out.println("\nNew Password Again (Enter '-' for not change)\t:");
-									String newPassA = sc.next();
-									if(newPass.equals(newPassA))
-										obj.updatePassword(oldPass,newPass);
+						System.out.println("\nEnter Registered Email/Phone: ");
+						String id = sc.next();
+						System.out.println("\nEnter Registered Password: ");
+						String pass = sc.next();
+						if(obj.login(id, pass)) {
+							while(!home && !exit) {
+								if(obj.getUser().getType().equals(UserType.BUYER)) {
+									System.out.println("***********************************************************************************");
+									System.out.println("\n\t\t\tThis is User's Home\n");
+									obj.userHome().stream().limit(5).forEach(System.out::print);	// display only 5  property on first page						
+									System.out.println("\n\n1.Apply Filters and Search Properties"
+											+ "\n2.Update Profile"
+											+ "\n3.Update Password"
+											+ "\n4.View Property(By ID)"
+											+ "\n5.Logout");
+									switch (sc.next()) {
+									case "1":
+										System.out.println("\n Apply Filters by providing 5 Parameters ->->->->\n");
+										System.out.println("\nLocation(Enter '-' for not applying...)\t:");
+										String loc = sc.next();
+										System.out.println("\nMin Price(Enter '-' for not applying...)\t:");
+										String min = sc.next();
+										System.out.println("\nMax Price(Enter '-' for not applying...)\t:");
+										String max = sc.next();
+										System.out.println("\nProperty Type(Enter '-' for not applying,\r\n"
+												+ " 1.VILLA,\r\n" + 
+												"	2.FLAT,\r\n" + 
+												"	3.APPARTMENT,\r\n" + 
+												"	4.HOUSE)\t\t:");
+										String propType = sc.next();
+										System.out.println("\nLandmark(Enter '-' for not applying...)\t:");
+										String lm = sc.next();
+										obj.Search(new Filter(loc, min, max, decode.decodeType(propType), lm));
+										boolean userhome = true;
+										while(userhome) {
+											/*
+											 * case "5": System.out.println("Enter Property ID:"); String propId =
+											 * sc.next(); obj.
+											 */
+										}
+										break;
+									case "2":
+										System.out.println("\n User's Profile ->->->->\n");
+										System.out.println(obj.getUser());
+										System.out.println("New Name (Enter '-' for not change)\t:");
+										String name = sc.next();
+										System.out.println("\nContact (Enter '-' for not change)\t:");
+										String contact = sc.next();
+										obj.updateUserProfile(name, contact);
+										break;
+									case "3":
+										//input old pass, new pass and new pass again and pass it by mehtod:
+										System.out.println("\n User's Profile ->->->->\n");
+										System.out.println(obj.getUser());
+										System.out.println("Old Password (Enter '-' for not change)\t:");
+										String oldPass = sc.next();
+										System.out.println("\nNew Password (Enter '-' for not change)\t:");
+										String newPass = sc.next();
+										System.out.println("\nNew Password Again (Enter '-' for not change)\t:");
+										String newPassA = sc.next();
+										if(newPass.equals(newPassA))
+											obj.updatePassword(oldPass,newPass);
+										else
+											System.out.println("Pass didn't match!");
+										break;
+									case "4":
+										System.out.println("Enter Property ID:");
+										String propId = sc.next();
+										try {
+											System.out.println(obj.viewProperty(propId).viewProp());
+										} catch (PropertyException e) {
+											System.err.println(e.getMessage());
+										}
+
+										break;
+									case "5":
+										System.out.println("Log-ing Out! ---------------------------------------------------");
+										obj.logout();
+										home=true;
+										break;
+									default:
+										break;
+									}
+								}
+								else{								
+									System.out.println("***********************************************************************************");
+									System.out.println("\n\t\t\tThis is Admin's Home\n");
+									if(obj.userHome() == null)
+										System.out.println();//	// display only 5  property on first page						
 									else
-										System.out.println("Pass didn't match!");
-									break;
-								case "4":
-									System.out.println("Log-ing Out! ---------------------------------------------------");
-									obj.logout();
-									home=true;
-									break;
-								default:
-									break;
+										obj.userHome().stream().limit(5).forEach(System.out::print);
+									System.out.println("\n\n1.Add Property"
+											+ "\n2.Delete Property"
+											+ "\n3.Update Profile"
+											+ "\n4.Update Password"
+											+ "\n5.Logout");
+									switch (sc.next()) {
+									case "1":
+										System.out.println("\n Add Property here By providing details ->->->->\n");
+										System.out.println("\nLandmark(Enter '-' for not applying...)\t:");
+										String landmark = sc.next();
+										System.out.println("\nPrice\t:");
+										String propPrice = sc.next();
+										System.out.println("\nState(HouseNO City State PIN)\t:");
+										String state = sc.next();
+										System.out.println("\nCity(HouseNO City State PIN)\t:");
+										String city = sc.next();
+										System.out.println("\nHouse NO(HouseNO City State PIN)\t:");
+										String houseNo = sc.next();
+										System.out.println("\nLocality(HouseNO City State PIN)\t:");
+										String locality = sc.next();
+										Address propAddress = new Address(houseNo, city, state, locality);
+										System.out.println("\nProperty Type\r\n"
+												+ " 1.VILLA,\r\n" + 
+												"	2.FLAT,\r\n" + 
+												"	3.APPARTMENT,\r\n" + 
+												"	4.HOUSE)\t\t:");
+										String propType = sc.next();
+										System.out.println("\nDecription About Property\t:");
+										String propDescription = sc.next();
+										obj.addProperty(new Property(propAddress, propPrice, landmark, propDescription,decode.decodeType(propType) ));
+										break;
+
+									case "2":
+										System.out.println("\n User's Profile ->->->->\n");
+										System.out.println("Enter Property Id to Delete (Enter '-' for not change)\t:");
+										String propId = sc.next();
+										obj.deleteProperty(propId);
+										break;
+									case "3":
+										System.out.println("\n User's Profile ->->->->\n");
+										System.out.println(obj.getUser());
+										System.out.println("New Name (Enter '-' for not change)\t:");
+										String name = sc.next();
+										System.out.println("\nContact (Enter '-' for not change)\t:");
+										String contact = sc.next();
+										obj.updateUserProfile(name, contact);
+										break;
+									case "4":
+										//input old pass, new pass and new pass again and pass it by mehtod:
+										System.out.println("\n Update Password ->->->->\n");
+										System.out.println(obj.getUser());
+										System.out.println("Old Password \t:");
+										String oldPass = sc.next();
+										System.out.println("\nNew Password \t:");
+										String newPass = sc.next();
+										System.out.println("\nNew Password Again \t:");
+										String newPassA = sc.next();
+										if(newPass.equals(newPassA))
+											obj.updatePassword(oldPass,newPass);
+										else
+											System.out.println("Pass didn't match!");
+										break;
+									case "5":
+										System.out.println("Log-ing Out! ---------------------------------------------------");
+										obj.logout();
+										home=true;
+										break;
+									default:
+										break;
+									}
 								}
 							}
-							else{								
-								System.out.println("***********************************************************************************");
-								System.out.println("\n\t\t\tThis is Admin's Home\n");
-								if(obj.userHome() == null)
-									System.out.println();//	// display only 5  property on first page						
-								else
-									obj.userHome().stream().limit(5).forEach(System.out::print);
-								System.out.println("\n\n1.Add Property"
-										+ "\n2.Delete Property"
-										+ "\n3.Update Profile"
-										+ "\n4.Update Password"
-										+ "\n5.Logout");
-								switch (sc.next()) {
-								case "1":
-									System.out.println("\n Add Property here By providing details ->->->->\n");
-									System.out.println("\nLandmark(Enter '-' for not applying...)\t:");
-									String landmark = sc.next();
-									System.out.println("\nPrice\t:");
-									String propPrice = sc.next();
-									System.out.println("\nState(HouseNO City State PIN)\t:");
-									String state = sc.next();
-									System.out.println("\nCity(HouseNO City State PIN)\t:");
-									String city = sc.next();
-									System.out.println("\nHouse NO(HouseNO City State PIN)\t:");
-									String houseNo = sc.next();
-									System.out.println("\nLocality(HouseNO City State PIN)\t:");
-									String locality = sc.next();
-									Address propAddress = new Address(houseNo, city, state, locality);
-									System.out.println("\nProperty Type\r\n"
-											+ " 1.VILLA,\r\n" + 
-											"	2.FLAT,\r\n" + 
-											"	3.APPARTMENT,\r\n" + 
-											"	4.HOUSE)\t\t:");
-									String propType = sc.next();
-									System.out.println("\nDecription About Property\t:");
-									String propDescription = sc.next();
-									obj.addProperty(new Property(propAddress, propPrice, landmark, propDescription,decode.decodeType(propType) ));
-									break;
-								
-								case "2":
-									System.out.println("\n User's Profile ->->->->\n");
-									System.out.println("Enter Property Id to Delete (Enter '-' for not change)\t:");
-									String propId = sc.next();
-									obj.deleteProperty(propId);
-									break;
-								case "3":
-									System.out.println("\n User's Profile ->->->->\n");
-									System.out.println(obj.getUser());
-									System.out.println("New Name (Enter '-' for not change)\t:");
-									String name = sc.next();
-									System.out.println("\nContact (Enter '-' for not change)\t:");
-									String contact = sc.next();
-									obj.updateUserProfile(name, contact);
-									break;
-								case "4":
-									//input old pass, new pass and new pass again and pass it by mehtod:
-									System.out.println("\n Update Password ->->->->\n");
-									System.out.println(obj.getUser());
-									System.out.println("Old Password (Enter '-' for not change)\t:");
-									String oldPass = sc.next();
-									System.out.println("\nNew Password (Enter '-' for not change)\t:");
-									String newPass = sc.next();
-									System.out.println("\nNew Password Again (Enter '-' for not change)\t:");
-									String newPassA = sc.next();
-									if(newPass.equals(newPassA))
-										obj.updatePassword(oldPass,newPass);
-									else
-										System.out.println("Pass didn't match!");
-									break;
-								case "5":
-									System.out.println("Log-ing Out! ---------------------------------------------------");
-									obj.logout();
-									home=true;
-									break;
-								default:
-									break;
-							}
+							System.out.println("Login: Try Again?(Press y)\n Else(press 'n')");
+							if(!sc.next().equalsIgnoreCase("y"))
+								break;
+							else
+								home=false;
 						}
-					}
-						System.out.println("Login: Try Again?(Press y)\n Else(press 'n')");
-						if(!sc.next().equalsIgnoreCase("y"))
-							break;
-						else
-							home=false;
-					}
 					};
 					break;
 				case 2:
@@ -231,9 +251,9 @@ public class Main {
 					System.out.println("\n**Default Block(in Login Option)**\n\t\t<<Invalid Input>>\n\n");
 				}
 				break;
-/* ******************************** Case 1 ends here ******************************************** */
+				/* ******************************** Case 1 ends here ******************************************** */
 			case 2:
-				
+
 				System.out.println("\n**Register Here**");
 				System.out.println("Name:\t");
 				String name = sc.next();
@@ -251,21 +271,21 @@ public class Main {
 				String userType = sc.next();
 				if(pass1.equals(pass2))
 					System.out.println(obj.Register(new User(decode.decodeUser(userType) , email, pass1, name, phoneNo, null)));	//pass all parameters.
-					break;
-/* ******************************** Case 2 ends here ******************************************** */
+				break;
+				/* ******************************** Case 2 ends here ******************************************** */
 			case 3:
 				System.out.println("\n**AboutUs**");
 				break;
-/* ******************************** Case 3 ends here ******************************************** */
+				/* ******************************** Case 3 ends here ******************************************** */
 			case 4:
 				System.out.println("\n**Feedback**");
 				break;
-/* ******************************** Case 4 ends here ******************************************** */
+				/* ******************************** Case 4 ends here ******************************************** */
 			case 5:
 				sc.close();
 				System.out.println("Exit-ing");
 				System.exit(1);
-/* ******************************** Case 5 ends here ******************************************** */
+				/* ******************************** Case 5 ends here ******************************************** */
 			default:
 				System.out.println("\n**Default Block**\n\t\t<<++Invalid Input++>>\n\n");
 			}

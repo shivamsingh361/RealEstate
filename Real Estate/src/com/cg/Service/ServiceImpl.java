@@ -9,10 +9,12 @@ import com.cg.DAO.DaoBuyerImpl;
 import com.cg.DAO.DaoImpl;
 import com.cg.DAO.DaoSeller;
 import com.cg.DAO.DaoSellerImpl;
+import com.cg.DAO.StaticDB;
 import com.cg.DTO.Filter;
 import com.cg.DTO.Property;
 import com.cg.DTO.User;
 import com.cg.DTO.UserType;
+import com.cg.exception.PropertyException;
 
 public class ServiceImpl implements Service{
 
@@ -36,9 +38,9 @@ public class ServiceImpl implements Service{
 
 	@Override
 	public boolean forgotPassword(String id, String newPass) {
-			return buyerDao.updatePassword(id, newPass);
+		return buyerDao.updatePassword(id, newPass);
 	}
-	
+
 	@Override
 	public String updatePassword(String oldPass, String newPass) {
 		if(user.getPassword().equals(oldPass)) {
@@ -119,6 +121,26 @@ public class ServiceImpl implements Service{
 	@Override
 	public List<Property> deleteProperty(String propId) {
 		return sellerDao.deleteProperty(propId);
+	}
+
+	@Override
+	public Property viewProperty(String propId) {
+
+		Property prop = buyerDao.getPropertyById(propId);
+		if(prop != null) {
+			if(StaticDB.getInterestList().get(user) != null) {
+				StaticDB.getInterestList().get(user).add(prop);
+			}
+			else {
+				List<Property> list = new ArrayList<Property>();
+				list.add(prop);
+				StaticDB.getInterestList().put(user,list);
+			}
+			return prop;	
+		}
+		else {
+			throw new PropertyException("Invalid Property ID");
+		}
 	}
 
 }

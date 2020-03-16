@@ -27,8 +27,8 @@ public class Property {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-	@Override
-	public String toString() {
+	
+	public String viewProp() {
 		return "Property [propAddress=" + propAddress + ", propId=" + propId + ", propPrice=" + propPrice
 				+ ", landmark=" + landmark + ", propDescription=" + propDescription + ", type=" + type + "]+\n";
 	}
@@ -50,5 +50,8 @@ public class Property {
 	public String getCity(){
 		return propAddress.getCity();
 	}
-	
+	@Override
+	public String toString() {
+		return " "+propId+" "+ getType()+" "+getLandmark()+"\n";
+	}
 }

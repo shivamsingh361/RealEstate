@@ -24,5 +24,6 @@ public interface Service {
 	List<Property> addProperty(Property prop);
 	List<Property> deleteProperty(String propId);
 	abstract User getUser();
+	abstract Property viewProperty(String propId);
 	
 }
