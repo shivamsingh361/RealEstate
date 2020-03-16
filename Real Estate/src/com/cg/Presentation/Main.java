@@ -53,10 +53,10 @@ public class Main {
 					String id = sc.next();
 					System.out.println("\nEnter Registered Password: ");
 					String pass = sc.next();
-					System.out.println(id+pass);
 					if(obj.login(id, pass)) {
 						while(!home && !exit) {
 							if(obj.getUser().getType().equals(UserType.BUYER)) {
+								System.out.println("***********************************************************************************");
 								System.out.println("\n\t\t\tThis is User's Home\n");
 								obj.userHome().stream().limit(5).forEach(System.out::print);	// display only 5  property on first page						
 								System.out.println("\n\n1.Apply Filters and Search Properties"
@@ -115,7 +115,8 @@ public class Main {
 									break;
 								}
 							}
-							else{
+							else{								
+								System.out.println("***********************************************************************************");
 								System.out.println("\n\t\t\tThis is Admin's Home\n");
 								if(obj.userHome() == null)
 									System.out.println();//	// display only 5  property on first page						

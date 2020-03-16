@@ -1,9 +1,6 @@
 package com.cg.DAO;
 
 
-import java.util.List;
-
-import com.cg.DTO.Property;
 import com.cg.DTO.User;
 //import com.cg.DAO.*;
 public class DaoImpl implements Dao {

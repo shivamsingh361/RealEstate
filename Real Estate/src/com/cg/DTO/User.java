@@ -1,7 +1,5 @@
 package com.cg.DTO;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class User {
 
